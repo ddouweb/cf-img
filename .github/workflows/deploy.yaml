@@ -1,0 +1,29 @@
+# .github/workflows/deploy.yml
+name: Deploy to Cloudflare Workers
+
+on:
+  push:
+    branches:
+      - main  # 或者你希望触发部署的其他分支
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Rust
+        uses: actions/setup-rust@v1
+        with:
+          rust-version: 1.71  # 根据需要设置 Rust 版本
+
+      - name: Install Wrangler
+        run: npm install -g wrangler
+
+      - name: Build and Deploy
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+        run: |
+          cargo build --target wasm32-unknown-unknown --release
+          wrangler publish
