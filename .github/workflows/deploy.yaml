@@ -14,9 +14,12 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Rust
-        uses: actions/setup-rust@v1
+        uses: actions-rs/toolchain@v1.0.7
         with:
-          rust-version: 1.71  # 根据需要设置 Rust 版本
+          toolchain: stable
+          target: wasm32-unknown-unknown
+          override: true
+          rust-version: 1.80.1  # 根据需要设置 Rust 版本
 
       - name: Install Wrangler
         run: npm install -g wrangler
