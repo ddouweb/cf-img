@@ -1,5 +1,4 @@
 name = "cf-img"
-type = "rust"
 main = "build/worker/shim.mjs"
 compatibility_date = "2024-08-12"
 account_id = "0f78629c87903f0a0efdf9c2608cce3d"
